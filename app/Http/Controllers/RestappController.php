@@ -33,15 +33,14 @@ class RestappController extends Controller
      */
     public function create()
     {
-        $user = User::find($id);
+        $user = User::find(1);
         $movies = $user->movies;
-        return response()->json(
-            [
-                'user' => $user,
-            ],
-            200,[],
-            JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT
-        );
+        
+        $data = [
+            'movies' => $movies,
+        ];
+        
+        return view('rest.create',$data);
     }
 
     /**
@@ -89,7 +88,7 @@ class RestappController extends Controller
             ],
             200,[],
             JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT
-        );
+        ); 
     }
 
     /**
