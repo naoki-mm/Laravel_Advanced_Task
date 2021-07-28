@@ -85,5 +85,23 @@ class UsersController extends Controller
 
         return view('users.followers', $data);
     }
+    
+    public function destroyConfirm()
+    {
+        $user=\Auth::user();
+        $data = [
+            'user' => $user,
+        ];
+
+        return view('users.confirm', $data);
+        
+    }
+    
+    // public function destroy()
+    // {
+    //     $user=\Auth::user();
+    //     $user->delete;
+    //     return view('welcome');
+    // }    
 
 }
