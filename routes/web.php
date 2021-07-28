@@ -34,9 +34,9 @@ Route::resource('rest','RestappController', ['only' => ['index', 'show', 'create
 Route::group(['middleware' => 'auth'], function () {
     Route::put('users', 'UsersController@rename')->name('rename');
     // 退会確認画面
-    Route::get('confirm/{id}', 'UsersController@destroy_confirm')->name('destroy_confirm');
+    Route::get('users/confirm/{id}', 'UsersController@destroyConfirm')->name('destroyConfirm');
     // ユーザー削除
-    Route::delete('users/{id}', 'UsersController@destroy')->name('destroy');
+    Route::delete('users', 'UsersController@destroy')->name('destroy');
     
     Route::group(['prefix' => 'users/{id}'], function () {
         Route::post('follow', 'UserFollowController@store')->name('follow');

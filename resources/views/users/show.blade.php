@@ -24,8 +24,19 @@
                             {!! Form::text('name', $user->name, ['class' => 'form-control']) !!}
                         </div>
         
-                        {!! Form::submit('更新する？', ['class' => 'button btn btn-primary mt-2']) !!}
+                        {!! Form::submit('更新する？', ['class' => 'button btn btn-primary mt-2 mb-5']) !!}
                     {!! Form::close() !!}
+            
+            </div>
+        </div>
+        
+                <h3 class="mt-5">退会</h3>
+
+        <div class="row mt-5 mb-5">
+            <div class="col-sm-6">
+                {!! Form::open(['route' => ['destroyConfirm', '$user->id'], 'method' => 'get']) !!}
+                    {!! Form::submit('退会する？', ['class' => "button btn btn-danger mt-1"]) !!}
+                {!! Form::close() !!}
             
             </div>
         </div>
