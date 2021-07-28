@@ -97,11 +97,17 @@ class UsersController extends Controller
         
     }
     
-    // public function destroy()
-    // {
-    //     $user=\Auth::user();
-    //     $user->delete;
-    //     return view('welcome');
-    // }    
+    public function destroy()
+    {
+        $user=\Auth::user();
+        \Auth::logout();        
+        $user->delete();
+        
+        $users = User::orderBy('id','desc')->paginate(9);
+        
+        return view('welcome', [
+            'users' => $users,
+        ]);
+    }    
 
 }
