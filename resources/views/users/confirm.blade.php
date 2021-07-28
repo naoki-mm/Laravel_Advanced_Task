@@ -20,7 +20,7 @@
                     <a href="/" class="btn btn-primary">キャンセル</a>
                 </div>
                 
-                 {!! Form::open(['route'=>'destroy','method'=>'delete']) !!}
+                {!! Form::open(['route'=>['users.destroy', '$user->id'],'method'=>'delete']) !!}
                     {!!Form::submit('退会する',['class'=>'btn btn-danger'])!!}
                 {!!Form::close()!!}       
             </div>

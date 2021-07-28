@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
     // 退会確認画面
     Route::get('users/confirm/{id}', 'UsersController@destroyConfirm')->name('destroyConfirm');
     // ユーザー削除
-    Route::delete('users', 'UsersController@destroy')->name('destroy');
+    Route::delete('users/{id}', 'UsersController@destroy')->name('users.destroy');
     
     Route::group(['prefix' => 'users/{id}'], function () {
         Route::post('follow', 'UserFollowController@store')->name('follow');
