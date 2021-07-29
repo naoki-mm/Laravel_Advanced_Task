@@ -34,7 +34,7 @@
 
         <div class="row mt-5 mb-5">
             <div class="col-sm-6">
-                {!! Form::open(['route' => ['destroyConfirm', '$user->id'], 'method' => 'get']) !!}
+                {!! Form::open(['route' => ['confirm.destroy', $user->id], 'method' => 'get']) !!}
                     {!! Form::submit('退会する？', ['class' => "button btn btn-danger mt-1"]) !!}
                 {!! Form::close() !!}
             
