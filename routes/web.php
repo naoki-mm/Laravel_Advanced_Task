@@ -23,6 +23,14 @@ Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::resource('users', 'UsersController', ['only' => ['show']]);
+// Route::get('users/{id?}', 'UsersController@show')->name('users.show');
+    
+// Route::group(['middleware' => 'auth'], function () {
+//     // 退会確認画面
+//     Route::get('users/confirm', 'UsersController@destroyConfirm')->name('confirm.destroy');
+//     // ユーザー削除
+//     Route::delete('users', 'UsersController@destroy')->name('users.destroy');    
+// });
 
 Route::group(['prefix' => 'users/{id}'], function () {
     Route::get('followings', 'UsersController@followings')->name('followings');
@@ -34,9 +42,9 @@ Route::resource('rest','RestappController', ['only' => ['index', 'show', 'create
 Route::group(['middleware' => 'auth'], function () {
     Route::put('users', 'UsersController@rename')->name('rename');
     // 退会確認画面
-    Route::get('users/confirm/{id}', 'UsersController@destroyConfirm')->name('destroyConfirm');
+    Route::get('users/{id}/confirm', 'UsersController@destroyConfirm')->name('confirm.destroy');
     // ユーザー削除
-    Route::delete('users/{id}', 'UsersController@destroy')->name('users.destroy');
+    Route::delete('users', 'UsersController@destroy')->name('users.destroy');
     
     Route::group(['prefix' => 'users/{id}'], function () {
         Route::post('follow', 'UserFollowController@store')->name('follow');
@@ -44,4 +52,6 @@ Route::group(['middleware' => 'auth'], function () {
     });    
     
     Route::resource('movies', 'MoviesController', ['only' => ['create', 'store', 'destroy']]);
+
+    
 });
