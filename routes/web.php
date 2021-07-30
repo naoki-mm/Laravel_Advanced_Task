@@ -22,15 +22,14 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
+    // 退会確認画面：URLのIDを削除した時にエラーを出さないために、Routeの優先度を考慮して、」user.showよりも前に実装
+Route::group(['middleware' => 'auth'], function () {
+    Route::put('users', 'UsersController@rename')->name('rename');
+    Route::get('users/confirm', 'UsersController@destroyConfirm')->name('confirm.destroy');
+    Route::delete('users', 'UsersController@destroy')->name('users.destroy');
+});
+
 Route::resource('users', 'UsersController', ['only' => ['show']]);
-// Route::get('users/{id?}', 'UsersController@show')->name('users.show');
-    
-// Route::group(['middleware' => 'auth'], function () {
-//     // 退会確認画面
-//     Route::get('users/confirm', 'UsersController@destroyConfirm')->name('confirm.destroy');
-//     // ユーザー削除
-//     Route::delete('users', 'UsersController@destroy')->name('users.destroy');    
-// });
 
 Route::group(['prefix' => 'users/{id}'], function () {
     Route::get('followings', 'UsersController@followings')->name('followings');
@@ -40,12 +39,6 @@ Route::group(['prefix' => 'users/{id}'], function () {
 Route::resource('rest','RestappController', ['only' => ['index', 'show', 'create', 'store', 'destroy']]);
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::put('users', 'UsersController@rename')->name('rename');
-    // 退会確認画面
-    Route::get('users/{id}/confirm', 'UsersController@destroyConfirm')->name('confirm.destroy');
-    // ユーザー削除
-    Route::delete('users', 'UsersController@destroy')->name('users.destroy');
-    
     Route::group(['prefix' => 'users/{id}'], function () {
         Route::post('follow', 'UserFollowController@store')->name('follow');
         Route::delete('unfollow', 'UserFollowController@destroy')->name('unfollow');
