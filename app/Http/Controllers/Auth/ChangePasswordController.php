@@ -19,7 +19,7 @@ class ChangePasswordController extends Controller
         $user->password = bcrypt($request->password_new);
         $user->save();
         
-        return redirect()->route('users.show', ['id' => $user->id]);
-        // return redirect('users/{$user->id}');
+        return redirect()->route('users.show', ['id' => $user->id])
+            ->with('flash_change_pass', '　　　パスワードを変更しました');
     }
 }
