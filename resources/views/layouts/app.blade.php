@@ -11,10 +11,17 @@
         
     </head>
 
-    <body>
+    <body
 
+        <!--パスワード変更のフラッシュメッセージ-->
+        @if (session('flash_change_pass'))
+            <div class="alert-success py-3 font-weight-bold ">
+                {{ session('flash_change_pass') }}
+            </div>
+        @endif
+        
         @include('commons.header')
-
+        
         <div class="container">
 
             @include('commons.error_messages')
