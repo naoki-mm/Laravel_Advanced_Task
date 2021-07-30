@@ -28,9 +28,22 @@
                     {!! Form::close() !!}
             
             </div>
+            
         </div>
         
-                <h3 class="mt-5">退会</h3>
+        <h3 class="mt-5">パスワードの変更</h3>
+
+        <div class="row mt-5 mb-5">
+            <div class="col-sm-6">
+                {!! Form::open(['route' => 'password.form', 'method' => 'get']) !!}
+                    {!! Form::submit('パスワードを変更する？', ['class' => "button btn btn-primary mt-1 mb-5"]) !!}
+                {!! Form::close() !!}
+            
+            </div>
+        </div>
+            
+        
+        <h3 class="mt-5">退会</h3>
 
         <div class="row mt-5 mb-5">
             <div class="col-sm-6">
