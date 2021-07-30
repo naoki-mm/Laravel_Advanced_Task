@@ -3,10 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use App\Rules\CurrentPasswordCheck;
 
 class ChangePasswordRequest extends FormRequest
 {
@@ -17,11 +14,11 @@ class ChangePasswordRequest extends FormRequest
      */
     public function authorize()
     {
-        if ($this->path() == 'password\change') {
+        // if($this->path() == 'password\change') {
             return true;    
-        } else {
-            return false;
-        }
+        // } else {
+            // return false;
+        // }
     }
 
     /**
@@ -32,9 +29,23 @@ class ChangePasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'password_current' => 'required',
-            'password_new' => 'required|string|min:6|confirmed',
-            'password_new_confirmation' => 'required'            
+            'password_current' => ['required', new CurrentPasswordCheck()],
+            'password_new' => 'required|string|min:6|confirmed|different:password_current',
+            'password_new_confirmation' => 'required',       
+        ];
+    }
+    
+    public function messages()
+    {
+        return [
+            
+            'password_current.required' => '現在のパスワードを入力してください。',
+            'password_new.different' => '現在のパスワードと新しいパスワードが同じです。',
+            'password_new.required' => '新しいパスワードを入力してください。',
+            'password_new_confirmation.required' => '確認用のパスワードを入力してください。',
+            'password_new.min' => 'パスワードは6文字以上で設定してください。',
+            'password_new.strig' => 'パスワードは数字と文字の組み合わせで設定してください。',
+            'password_new.confirmed' => '新しいパスワードと確認用パスワードが異なります。',
         ];
     }
 }
