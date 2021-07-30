@@ -19,13 +19,7 @@ class ChangePasswordController extends Controller
         $user->password = bcrypt($request->password_new);
         $user->save();
         
-        $data=[
-            'user' => $user,
-            'movies' => $movies,
-        ];
-        
-        $data += $this->counts($user);
-
-        return view('users.show',$data);
-    }  
+        return redirect()->route('users.show', ['id' => $user->id]);
+        // return redirect('users/{$user->id}');
+    }
 }
