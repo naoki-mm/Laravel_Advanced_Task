@@ -44,7 +44,7 @@ class ChangePasswordRequest extends FormRequest
             'password_new.required' => '新しいパスワードを入力してください。',
             'password_new_confirmation.required' => '確認用のパスワードを入力してください。',
             'password_new.min' => 'パスワードは6文字以上で設定してください。',
-            'password_new.strig' => 'パスワードは数字と文字の組み合わせで設定してください。',
+            'password_new.strig' => 'パスワードを正しく入力してください。',
             'password_new.confirmed' => '新しいパスワードと確認用パスワードが異なります。',
         ];
     }

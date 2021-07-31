@@ -25,9 +25,11 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::group(['middleware' => 'auth'], function () {
     // ユーザー名変更
     Route::put('users', 'UsersController@rename')->name('rename');
+    
     // 退会機能：URLのIDを削除した時にエラーを出さないために、Routeの優先度を考慮して、」user.followよりも前に実装
     Route::get('users/confirm', 'UsersController@destroyConfirm')->name('confirm.destroy');
     Route::delete('users', 'UsersController@destroy')->name('users.destroy');
+    
     // パスワード変更機能
     Route::get('password/change', 'Auth\ChangePasswordController@changePasswordForm')->name('password.form');
     Route::put('password/change', 'Auth\ChangePasswordController@changePassword')->name('password.change');
