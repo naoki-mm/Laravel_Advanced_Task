@@ -106,9 +106,6 @@ class UsersController extends Controller
         $users = User::orderBy('id','desc')->paginate(9);
 
         // viewメソッドで返すとURLに削除ユーザーの情報が表示される。
-        // return view('welcome', [
-        //     'users' => $users,
-        // ]);
         return redirect('/');
     }    
 
